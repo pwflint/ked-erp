@@ -14,6 +14,7 @@ import { cpSync, existsSync, readFileSync, readdirSync, createReadStream, statSy
 import type { Plugin } from 'vite';
 import { STATIC_ASSETS_CACHE, isStaticAssetRequest } from './src/pwa/staticAssetRoute';
 import { LOCALE_KEYS_CHUNK, isLocaleKeysId, localeKeyIndex } from './vite.locale-key-index';
+import { KED_APP_NAME, KED_APP_SHORT_NAME, kedHtml } from './vite.ked';
 
 const cesiumSource = path.resolve(__dirname, 'node_modules/cesium/Build/Cesium');
 const cesiumDirs = ['Workers', 'ThirdParty', 'Assets', 'Widgets'] as const;
@@ -209,6 +210,7 @@ export default defineConfig({
     pdfjsAssets(),
     localeKeyIndex(__dirname),
     jsonLdSoftwareVersion(),
+    kedHtml(),
     // ── Mobile PWA — Slice 1 ────────────────────────────────────────────
     // Installable PWA with offline-app-shell + i18n bundle caching.
     //
@@ -250,8 +252,8 @@ export default defineConfig({
       devOptions: { enabled: false },
       includeAssets: ['favicon.svg', 'favicon.ico', 'apple-touch-icon.png', 'brand/erp/*.svg', 'pwa/*.png'],
       manifest: {
-        name: 'OpenConstructionERP',
-        short_name: 'OCERP',
+        name: KED_APP_NAME,
+        short_name: KED_APP_SHORT_NAME,
         description:
           'Open-source construction cost estimation, BIM takeoff, BOQ, tendering and field operations.',
         theme_color: '#2987F8',
