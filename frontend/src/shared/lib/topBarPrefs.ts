@@ -5,6 +5,7 @@
  * they are the way back to every other control.
  */
 import { useSyncExternalStore } from 'react';
+import { KED } from '@/ked/flags';
 
 export const TOP_BAR_ITEMS = [
   'pack',
@@ -25,7 +26,7 @@ export type TopBarItem = (typeof TOP_BAR_ITEMS)[number];
 export type TopBarPrefs = Record<TopBarItem, boolean>;
 
 export const DEFAULT_TOP_BAR_PREFS: TopBarPrefs = Object.fromEntries(
-  TOP_BAR_ITEMS.map((k) => [k, false]),
+  TOP_BAR_ITEMS.map((k) => [k, KED.hiddenTopBar.includes(k)]),
 ) as TopBarPrefs;
 export const TOP_BAR_PREFS_KEY = 'oe_topbar_prefs_v1';
 
@@ -35,7 +36,7 @@ let cached: TopBarPrefs | null = null;
 function sanitize(raw: unknown): TopBarPrefs {
   const src = (raw && typeof raw === 'object' ? raw : {}) as Partial<Record<TopBarItem, unknown>>;
   const out = { ...DEFAULT_TOP_BAR_PREFS };
-  for (const k of TOP_BAR_ITEMS) out[k] = src[k] === true;
+  for (const k of TOP_BAR_ITEMS) out[k] = src[k] === true || DEFAULT_TOP_BAR_PREFS[k];
   return out;
 }
 

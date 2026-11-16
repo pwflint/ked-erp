@@ -55,6 +55,7 @@ import { dashboardGuide } from './dashboardGuide';
 import { pricedPositions, type PositionCounts } from './pricedPositions';
 import { MultiCurrencyTotal } from '@/shared/ui/MultiCurrencyTotal';
 import { WhatsNewCard } from '@/shared/ui/WhatsNewCard';
+import { KED } from '@/ked/flags';
 import { DemoSeedingHint } from '@/features/processes/DemoSeedingHint';
 import { CompactProjectCard } from './components/CompactProjectCard';
 import { type ProjectPin } from './components/DashboardProjectsMap';
@@ -2785,7 +2786,7 @@ function DashboardPageInner() {
           localStorage `oe_whats_new_seen_<version>` flag so it only
           appears once per release per browser. Sits above the hero so
           the user sees release highlights before the dashboard hero. */}
-      <WhatsNewCard />
+      {!KED.hideWhatsNew && <WhatsNewCard />}
       {/* First start: the demo projects are still installing in the
           background, so an empty project list here is temporary. */}
       <DemoSeedingHint />

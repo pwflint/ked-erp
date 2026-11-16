@@ -44,6 +44,7 @@ import { usePreferencesStore } from '@/stores/usePreferencesStore';
 import { hydrateInfoBlocksFromServer } from '@/stores/useInfoBlockPrefsStore';
 import { useViewModeDefault } from './layout/useViewModeDefault';
 import { ddcVerifyIntegrity, ddcInjectMeta, DDC_ORIGIN } from '@/shared/lib/ddc-integrity';
+import { KED } from '@/ked/flags';
 import { NavigationProgress } from '@/shared/lib/navigationProgress';
 import { useKeyboardShortcuts } from '@/shared/hooks/useKeyboardShortcuts';
 import { useTranslation } from 'react-i18next';
@@ -1331,7 +1332,7 @@ export default function App() {
           `OnboardingTour` component still ships for per-feature
           custom tours (e.g. Pipelines page), but is no longer mounted
           globally. */}
-      {isAuthenticated && <ProductTour />}
+      {isAuthenticated && !KED.hideProductTour && <ProductTour />}
       <Routes>
         {/* Public share-link landing page — no auth required, no app shell */}
         <Route path="/share/:token" element={<SharePage />} />
@@ -1739,7 +1740,7 @@ export default function App() {
         <Route path="/saved-views" element={<P title="Saved Views"><SavedViewsPage /></P>} />
         <Route path="/projects/:projectId/saved-views" element={<P title="Saved Views"><SavedViewsPage /></P>} />
         <Route path="/about" element={<P title="About"><AboutPage /></P>} />
-        <Route path="/how-it-works" element={<P title="How it works"><HowItWorksPage /></P>} />
+        {!KED.hideHowItWorks && <Route path="/how-it-works" element={<P title="How it works"><HowItWorksPage /></P>} />}
         {/* Cases (playbooks) - list at /cases, the stepper at /cases/:playbookId
             (one component serves both so it stays a single lazy chunk).
             The editor is a separate chunk: most readers never author a case,

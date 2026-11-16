@@ -70,6 +70,7 @@ import { APP_VERSION } from '@/shared/lib/version';
 import { useSidebarBadges } from '@/shared/hooks/useSidebarBadges';
 import { useHiddenModules } from '@/shared/hooks/useHiddenModules';
 import { useFooterPrefs } from '@/shared/lib/footerPrefs';
+import { KED } from '@/ked/flags';
 import { floatingPref } from '@/shared/lib/floatingPrefs';
 import { usePartnerPack } from '@/shared/hooks/usePartnerPack';
 import { applyPackMenu, visibleHiddenRoutes } from './packMenu';
@@ -1226,7 +1227,7 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
   // the very top of the menu, whatever the mode; see `LearnSection`. Its rows
   // pass the same gates as any group's, and hiding it goes through
   // `hiddenGroups`, so it also counts toward the "{N} hidden" chip.
-  const learnGroup = navGroups.find((group) => group.id === LEARN_GROUP_ID);
+  const learnGroup = KED.hideLearn ? undefined : navGroups.find((group) => group.id === LEARN_GROUP_ID);
   const learnItems = learnGroup ? visibleGroupItems(learnGroup) : [];
   const learnLabel = learnGroup
     ? t(learnGroup.labelKey, { defaultValue: learnGroup.defaultLabel ?? learnGroup.id })

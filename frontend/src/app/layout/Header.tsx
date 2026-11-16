@@ -40,6 +40,8 @@ import { SupportUsButton } from './SupportUsButton';
 import { SubscribeButton } from './SubscribeButton';
 import { ProjectJourneyButton } from './ProjectJourney';
 import { useTopBarPrefs } from '@/shared/lib/topBarPrefs';
+import { KED } from '@/ked/flags';
+import { KedHelpMenu } from '@/ked/KedHelpMenu';
 import { usePageHeaderSlot } from '@/shared/ui/pageHeaderSlot';
 import { PresenceAvatarStack } from '@/features/global_presence';
 import { getRouteIcon } from './routeIcons';
@@ -631,7 +633,7 @@ export function Header({ title, onMenuClick }: HeaderProps) {
             report doesn't have to scan past the marketing CTAs. */}
         {/* Only while the Learn card is hidden from the menu: its way back,
             at every width. */}
-        <LearnTopBarButton />
+        {!KED.hideLearn && <LearnTopBarButton />}
         {/* Background services: what the platform keeps loaded, at every
             width, because it is the way back to a feature that stopped. */}
         <ProcessesButton />
@@ -648,7 +650,7 @@ export function Header({ title, onMenuClick }: HeaderProps) {
         {!bar.supportUs && <div className="hidden 2xl:block"><SupportUsButton /></div>}
         {!bar.subscribe && <div className="hidden 2xl:block"><SubscribeButton /></div>}
         {!bar.bugReport && <BugReportMenu />}
-        <HelpMenu />
+        {KED.replaceHelpMenu ? <KedHelpMenu /> : <HelpMenu />}
 
         {/* Hairline divider between Zone 3 and Zone 4. */}
         <div className="hidden sm:block h-4 w-px bg-border-light/70" aria-hidden />
