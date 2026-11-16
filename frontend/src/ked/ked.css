@@ -1,0 +1,54 @@
+/*
+ * KED fork: styling the runtime appearance settings cannot express.
+ *
+ * Loaded after index.css (see main.tsx). It overrides variables index.css
+ * defines; it does not restyle components. The accent colour and the corner
+ * radius are NOT set here: they are workspace settings (custom accent
+ * #8c8377, radius "round").
+ *
+ * Values come from the KED design system's chrome tokens, whose rule is that
+ * the interface stays neutral: black, white and gray, with no hue.
+ *
+ * Fonts are self-hosted from ./fonts under the SIL Open Font License; the
+ * licence texts sit beside them.
+ */
+
+@font-face { font-family: 'Poppins'; src: url('./fonts/Poppins-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Poppins'; src: url('./fonts/Poppins-Italic.ttf') format('truetype'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Poppins'; src: url('./fonts/Poppins-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Poppins'; src: url('./fonts/Poppins-SemiBold.ttf') format('truetype'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Poppins'; src: url('./fonts/Poppins-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Amatic SC'; src: url('./fonts/AmaticSC-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+
+/* Body face. Whichever font the appearance setting names, the interface is set
+   in Poppins. The design system's body weight is Light (300) at 17px; this
+   interface runs at 13 to 14px, so upstream's weights are kept. */
+html:root,
+html:root[data-font] {
+  --oe-font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Neutral text and lines, light mode only. Dark mode and the high-contrast
+   comfort option keep upstream's values. */
+html:root:not(.dark):not([data-contrast='high']) {
+  --oe-text-primary: #111111;
+  --oe-text-secondary: #3d3d3d;
+  --oe-text-tertiary: #6b6b6b;
+  --oe-text-quaternary: #6b6b6b;
+  --oe-border: #c9c9c9;
+  --oe-border-light: #e5e5e5;
+  --oe-border-default: #e5e5e5;
+}
+
+/* Page titles in the display face, Regular weight, never tracked. Table, card
+   and form headings stay in the body face. */
+html:root h1:not(.sr-only) {
+  font-family: 'Amatic SC', var(--oe-font-sans);
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+}
+html:root:not(.dark):not([data-contrast='high']) h1:not(.sr-only) {
+  color: #3d3d3d;
+}

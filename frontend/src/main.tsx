@@ -15,6 +15,7 @@ import { retireStaleCaches } from './pwa/retireStaleCaches';
 import { captureDemoPick } from '@/shared/ui/DemoSwitcherBar';
 import { hydrateUnitsSystem } from '@/features/market/api';
 import './index.css';
+import './ked/ked.css';
 
 captureDemoPick();
 
