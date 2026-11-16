@@ -1,3 +1,10 @@
+> **KED fork.** This repository is the fork KALEIOPE Environmental Design runs for its own projects.
+> Based on OpenConstructionERP, tag `v19.7.0` (commit `bbc3cae5a8db9c17a32cd34840b8509186a15415`).
+> Source of this fork: <https://github.com/pwflint/ked-erp>, branch `ked`. The `main` branch mirrors upstream unchanged.
+> This product is not affiliated with, endorsed by, or sponsored by DataDrivenConstruction.
+>
+> Everything below this note is the upstream README.
+
 <div align="center">
 
 # OpenConstructionERP
