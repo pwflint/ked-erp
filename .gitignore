@@ -538,3 +538,7 @@ email-delivery-failures*.jsonl
 # KED proprietary material: publish only the folder README
 ked-private/*
 !ked-private/README.md
+
+# KED icons: upstream ignores *.png; these are build inputs
+!frontend/src/ked/icons/*.png
+!frontend/src/ked/icons/pwa/*.png
