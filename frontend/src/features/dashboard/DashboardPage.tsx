@@ -2901,6 +2901,7 @@ function DashboardPageInner() {
 
       {/* ─── 2. Hero · row B - thin meta-strip ───────────────────────── */}
       <div className="flex items-center flex-wrap gap-x-4 gap-y-2 animate-stagger-in" style={{ animationDelay: '140ms' }}>
+        {!KED.hideUpstreamAttribution && (<>
         {/* DDC attribution - slim inline link with tiny logo */}
         <a
           href="https://datadrivenconstruction.io/?utm_source=erp"
@@ -2936,6 +2937,7 @@ function DashboardPageInner() {
         </a>
 
         <span aria-hidden className="h-3 w-px bg-border-light" />
+        </>)}
 
         {/* System status pills */}
         <SystemStatusSummary

@@ -23,6 +23,7 @@ import { Compass } from 'lucide-react';
 
 import { Button } from './Button';
 import { TOUR_START_EVENT, type TourId } from './ProductTour';
+import { KED } from '@/ked/flags';
 
 export interface ModuleHelpButtonProps {
   /** Registered tour id to launch (must exist in TOUR_REGISTRY). */
@@ -32,6 +33,7 @@ export interface ModuleHelpButtonProps {
 }
 
 export function ModuleHelpButton({ tourId, className }: ModuleHelpButtonProps) {
+  if (KED.hideModuleHelp) return null;
   const { t } = useTranslation();
 
   const handleClick = useCallback(() => {

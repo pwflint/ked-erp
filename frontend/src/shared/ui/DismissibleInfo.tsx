@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { ChevronDown, ChevronUp, Info, X } from 'lucide-react';
 import { useInfoCardPresence } from './pageHeaderSlot';
 import { useModuleInfoStore } from '@/stores/useModuleInfoStore';
+import { KED } from '@/ked/flags';
 import { useInfoBlockPrefsStore, readLegacyCollapsed } from '@/stores/useInfoBlockPrefsStore';
 
 /**
@@ -123,6 +124,7 @@ export function DismissibleInfo({
   /** Extra classes for the outer wrapper (e.g. margin overrides). */
   className?: string;
 }) {
+  if (KED.hideIntroBoxes) return null;
   const { t } = useTranslation();
 
   // Per-user collapse state, synced across devices. `blocks[storageKey]` is

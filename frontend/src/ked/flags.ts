@@ -15,6 +15,14 @@ export const KED = {
   hideHowItWorks: true,
   /** Hide the "What's new" card on the dashboard. */
   hideWhatsNew: true,
+  /** Hide the per-module "Tour" and "How it works" buttons on every page. */
+  hideModuleHelp: true,
+  /** Hide the explainer box at the top of each module page. */
+  hideIntroBoxes: true,
+  /** Hide the dashboard strip that credits upstream and links to its site and repository. */
+  hideUpstreamAttribution: true,
+  /** Dashboard widgets removed for everyone: tutorial cases, promo videos and the setup checklist. */
+  hiddenDashboardWidgets: ['cases_learn', 'cases_market', 'watch_share', 'onboarding'] as readonly string[],
   /** Top-bar items forced hidden for everyone, on every device (see `topBarPrefs.ts`). */
   hiddenTopBar: ['news', 'supportUs', 'subscribe', 'bugReport'] as readonly string[],
   /** Sidebar-footer buttons forced hidden for everyone, on every device (see `footerPrefs.ts`). */

@@ -7,6 +7,7 @@
 // catalogues and the popover load only when the reader opens it.
 
 import { create } from 'zustand';
+import { KED } from '@/ked/flags';
 import { ITEM_COUNT_BY_ROUTE, VIDEO_COUNT_BY_ROUTE } from './academyIndex.generated';
 
 const ROUTES = [...new Set([...Object.keys(VIDEO_COUNT_BY_ROUTE), ...Object.keys(ITEM_COUNT_BY_ROUTE)])].sort(
@@ -45,11 +46,11 @@ function readHints(): HintState {
   try {
     const parsed = JSON.parse(localStorage.getItem(KEY) ?? '{}') as Partial<HintState>;
     return {
-      off: parsed.off === true,
+      off: parsed.off === true || KED.hideLearn,
       hidden: Array.isArray(parsed.hidden) ? parsed.hidden.filter((r): r is string => typeof r === 'string') : [],
     };
   } catch {
-    return { off: false, hidden: [] };
+    return { off: KED.hideLearn, hidden: [] };
   }
 }
 

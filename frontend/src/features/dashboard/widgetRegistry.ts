@@ -10,6 +10,7 @@
  * it's page chrome and always stays pinned at the top.
  */
 import type { LucideIcon } from 'lucide-react';
+import { KED } from '@/ked/flags';
 import {
   Leaf,
   Sparkles,
@@ -435,7 +436,7 @@ export const DASHBOARD_WIDGETS: readonly DashboardWidgetMeta[] = [
 ] as const;
 
 export const DASHBOARD_WIDGET_IDS: readonly string[] =
-  DASHBOARD_WIDGETS.map((w) => w.id);
+  DASHBOARD_WIDGETS.map((w) => w.id).filter((id) => !KED.hiddenDashboardWidgets.includes(id));
 
 export const DASHBOARD_WIDGET_BY_ID: Readonly<
   Record<string, DashboardWidgetMeta>

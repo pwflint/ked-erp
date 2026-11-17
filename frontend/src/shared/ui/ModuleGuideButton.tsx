@@ -18,6 +18,7 @@ import { GraduationCap } from 'lucide-react';
 
 import { Button } from './Button';
 import { ModuleGuide, type ModuleGuideContent } from './ModuleGuide';
+import { KED } from '@/ked/flags';
 
 // Lazy: the pill indexes every playbook, which must not ride in the entry chunk.
 const ModuleCasesButton = lazy(() =>
@@ -42,6 +43,7 @@ export function ModuleGuideButton({
   label,
   onCta,
 }: ModuleGuideButtonProps) {
+  if (KED.hideModuleHelp) return null;
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
 
