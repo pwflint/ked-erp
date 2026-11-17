@@ -72,6 +72,35 @@ export function KedHelpMenu() {
             </span>
             <ExternalLink size={12} className="text-content-quaternary shrink-0" />
           </a>
+          <a
+            role="menuitem"
+            href={`${KED.sourceUrl}/blob/ked/LICENSE`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
+            className="flex w-full items-center gap-2 px-3 py-2 text-sm text-content-primary hover:bg-surface-secondary transition-colors"
+          >
+            <span className="w-[14px] shrink-0" aria-hidden />
+            <span className="flex-1">{t('ked.help.licence', { defaultValue: 'Licence: AGPL-3.0, no warranty' })}</span>
+            <ExternalLink size={12} className="text-content-quaternary shrink-0" />
+          </a>
+          <a
+            role="menuitem"
+            href={`${KED.sourceUrl}/blob/ked/NOTICE`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
+            className="flex w-full items-center gap-2 px-3 py-2 text-sm text-content-primary hover:bg-surface-secondary transition-colors"
+          >
+            <span className="w-[14px] shrink-0" aria-hidden />
+            <span className="flex-1">{t('ked.help.notices', { defaultValue: 'Third-party notices and data attributions' })}</span>
+            <ExternalLink size={12} className="text-content-quaternary shrink-0" />
+          </a>
+          <p className="px-3 pt-1 pb-2 text-2xs leading-snug text-content-tertiary">
+            {t('ked.help.disclaimer', {
+              defaultValue: 'This product is not affiliated with, endorsed by, or sponsored by DataDrivenConstruction.',
+            })}
+          </p>
         </div>
       )}
     </div>

@@ -41,6 +41,10 @@ export const KED = {
   adminOnlyOnboarding: true,
   /** The product name shown in translated strings instead of upstream's (see `brandName.ts`). Empty string turns the swap off. */
   displayName: 'KALEIOPE Environmental Design',
+  /** Turn off upstream's update check and every notice it drives (sidebar card, badge, Settings line). KED monitors upstream releases another way. */
+  hideUpdateCheck: true,
+  /** Hide the corner card that asks users to rate or star upstream on GitHub. */
+  hideReviewPrompt: true,
   /** Where the source of this running version is published (AGPL-3.0, section 13). */
   sourceUrl: 'https://github.com/pwflint/ked-erp',
 } as const;

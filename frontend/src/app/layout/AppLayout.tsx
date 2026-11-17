@@ -18,6 +18,7 @@ import { GlobalCatalogueInstallIndicator } from '@/shared/ui/GlobalCatalogueInst
 import { DemoBanner } from '@/shared/ui/DemoBanner';
 import { DemoSwitcherBar } from '@/shared/ui/DemoSwitcherBar';
 import { ReviewPromptCard } from '@/shared/ui/ReviewPromptCard';
+import { KED } from '@/ked/flags';
 import { FloatingChatButton } from '@/features/erp-chat/FloatingChatButton';
 import { FloatingChatPanel } from '@/features/erp-chat/FloatingChatPanel';
 import {
@@ -222,7 +223,7 @@ export function AppLayout({ title, children }: AppLayoutProps) {
           once per signed-in session (App.tsx `AppShell`), and every piece of
           state the card needs lives in useReviewPromptStore anyway, not in
           the component. */}
-      <ReviewPromptCard />
+      {!KED.hideReviewPrompt && <ReviewPromptCard />}
 
       {/* Global onboarding tour (ProductTour) mounts once at App.tsx
           top level — moving it out of here was the fix for

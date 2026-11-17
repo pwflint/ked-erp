@@ -47,6 +47,7 @@ import { copyToClipboard } from '@/shared/lib/browser';
 import { isTauri, openExternalUrl, openInNewTab } from '@/shared/lib/desktop';
 import { getIntlLocale } from '@/shared/lib/formatters';
 import { compareVersions, parseVersion } from '@/shared/lib/version';
+import { KED } from '@/ked/flags';
 
 /* ── One-click upgrade — starts `pip install --upgrade` server-side ───
  *
@@ -198,7 +199,7 @@ const NOTES_CAP = 500;
  * update notice off for a deployment that does not want one - a demo, a
  * recording, a managed install upgraded by its own pipeline.
  */
-const UPDATE_CHECK_DISABLED = Boolean(import.meta.env.VITE_DISABLE_UPDATE_CHECK);
+const UPDATE_CHECK_DISABLED = KED.hideUpdateCheck || Boolean(import.meta.env.VITE_DISABLE_UPDATE_CHECK);
 
 /** The answer from ``GET /api/system/version-check``.
  *
