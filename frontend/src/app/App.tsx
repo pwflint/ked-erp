@@ -1739,7 +1739,7 @@ export default function App() {
         <Route path="/projects/:projectId/rfq-bidding" element={<P title="RFQ Bidding"><RFQBiddingPage /></P>} />
         <Route path="/saved-views" element={<P title="Saved Views"><SavedViewsPage /></P>} />
         <Route path="/projects/:projectId/saved-views" element={<P title="Saved Views"><SavedViewsPage /></P>} />
-        <Route path="/about" element={<P title="About"><AboutPage /></P>} />
+        {!KED.hideAbout && <Route path="/about" element={<P title="About"><AboutPage /></P>} />}
         {!KED.hideHowItWorks && <Route path="/how-it-works" element={<P title="How it works"><HowItWorksPage /></P>} />}
         {/* Cases (playbooks) - list at /cases, the stepper at /cases/:playbookId
             (one component serves both so it stays a single lazy chunk).
@@ -1747,21 +1747,21 @@ export default function App() {
             and the form has no business loading for the ones who do not.
             /cases/new is declared before the stepper for readability only -
             the router ranks a static segment above a dynamic one regardless. */}
-        <Route path="/videos" element={<P title="Videos"><VideosPage /></P>} />
-        <Route path="/courses" element={<P title="Courses and guides"><CoursesPage /></P>} />
+        {!KED.hideLearnPages && <Route path="/videos" element={<P title="Videos"><VideosPage /></P>} />}
+        {!KED.hideLearnPages && <Route path="/courses" element={<P title="Courses and guides"><CoursesPage /></P>} />}
         <Route path="/packs" element={<P title="Packs"><PacksPage /></P>} />
         <Route path="/packs/focus" element={<P title="Packs"><PackFocusPage /></P>} />
         <Route path="/packs/:slug" element={<P title="Packs"><PackDetailPage /></P>} />
         <Route path="/onboarding/demo" element={<P title="Demo projects"><DemoChooserPage /></P>} />
-        <Route path="/cases" element={<P title="Cases"><CasesPage /></P>} />
-        <Route path="/cases/new" element={<P title="Cases"><CaseEditorPage /></P>} />
-        <Route path="/cases/:playbookId/edit" element={<P title="Cases"><CaseEditorPage /></P>} />
-        <Route path="/cases/:playbookId" element={<P title="Cases"><CasesPage /></P>} />
+        {!KED.hideLearnPages && <Route path="/cases" element={<P title="Cases"><CasesPage /></P>} />}
+        {!KED.hideLearnPages && <Route path="/cases/new" element={<P title="Cases"><CaseEditorPage /></P>} />}
+        {!KED.hideLearnPages && <Route path="/cases/:playbookId/edit" element={<P title="Cases"><CaseEditorPage /></P>} />}
+        {!KED.hideLearnPages && <Route path="/cases/:playbookId" element={<P title="Cases"><CasesPage /></P>} />}
         {/* Inside track - backers-only early-look panel (donation perk):
             recent releases (reused from the /about changelog) + a short
             coming-next list. Gated client-side by a supporter access code
             remembered in localStorage; never gates the AGPL code itself. */}
-        <Route path="/inside" element={<P title="Inside track"><InsidePage /></P>} />
+        {!KED.hideAbout && <Route path="/inside" element={<P title="Inside track"><InsidePage /></P>} />}
         <Route path="/project-intelligence" element={<P title="Project Intelligence"><ProjectIntelligencePage /></P>} />
         {/* Architecture Map — internal tool, admin-only. Surfaces module
             dependency graph + DDC integrity audit; not for day-to-day use. */}

@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { Card, CardHeader, CardContent } from '@/shared/ui';
 import { useHiddenModules } from '@/shared/hooks/useHiddenModules';
 import { useFooterPrefs, writeFooterPrefs, type FooterItem } from '@/shared/lib/footerPrefs';
+import { KED } from '@/ked/flags';
 
 interface FooterRow {
   id: string;
@@ -62,6 +63,7 @@ export function SidebarFooterCard() {
       <CardContent>
         <ul className="flex flex-col divide-y divide-border-light">
           {ROWS.map((row) => {
+            if (KED.hiddenFooter.includes(row.id) || (KED.hideAbout && row.id === 'about')) return null;
             const shown = isShown(row);
             const label = row.labelKey ? t(row.labelKey, { defaultValue: row.fallback }) : row.fallback;
             return (

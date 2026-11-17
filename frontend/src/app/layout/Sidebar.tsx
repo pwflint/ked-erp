@@ -163,7 +163,7 @@ type AdminGridItem = NavItem & { onClick?: () => void };
 const adminGridItems: NavItem[] = [
   { labelKey: 'sidebar.admin_grid.settings', to: '/settings', icon: Settings },
   { labelKey: 'sidebar.admin_grid.users', to: '/users', icon: Users },
-  { labelKey: 'sidebar.admin_grid.about', to: '/about', icon: Info },
+  ...(KED.hideAbout ? [] : [{ labelKey: 'sidebar.admin_grid.about', to: '/about', icon: Info }]),
 ];
 
 /** Every row the "Edit menu" editor can hide: the catalogue rows plus the

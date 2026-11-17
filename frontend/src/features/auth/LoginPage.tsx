@@ -23,6 +23,7 @@ import { APP_VERSION } from '@/shared/lib/version';
 import { loginFailureKindFromResponse } from './loginError';
 import { AuthBackground } from './AuthBackground';
 import { ClassicAuthAside, ClassicAuthFooter } from './ClassicAuth';
+import { KED } from '@/ked/flags';
 import {
   shouldAttemptDesktopBootstrap,
   shouldQueryFirstRun,
@@ -408,9 +409,9 @@ export function LoginPage() {
   }
 
   return (
-    <div className="oe-auth relative grid h-screen grid-cols-1 lg:grid-cols-2 bg-surface-secondary overflow-hidden">
+    <div className={`oe-auth relative grid h-screen grid-cols-1 ${KED.hideLoginMarketing ? '' : 'lg:grid-cols-2'} bg-surface-secondary overflow-hidden`}>
       <AuthBackground />
-      <ClassicAuthAside />
+      {!KED.hideLoginMarketing && <ClassicAuthAside />}
 
       {/* Local style block - premium glass variant + drifting orb keyframes
           scoped to the login page. Pattern mirrors LoginPageNext.tsx. */}
@@ -529,6 +530,7 @@ export function LoginPage() {
       {/* ── Right column on lg+: marketing & benefits.
           Order swap (lg:order-2) puts the form on the left so it's the
           first thing the eye lands on - primary action priority. */}
+      {!KED.hideLoginMarketing && (
       <div className="oe-auth-standard-only hidden lg:flex relative z-10 lg:order-2 flex-col justify-center pl-14 xl:pl-20 pr-12 xl:pr-16 py-6 overflow-hidden">
         {/* Marketing column showcase - color lives here. Sky/cyan mesh +
             slow-drifting orbs + faint noise grain. The form column on the
@@ -735,6 +737,7 @@ export function LoginPage() {
           </div>
         </div>
       </div>
+      )}
 
       {/* Center column removed - tags moved to left panel footer */}
 
@@ -1048,6 +1051,7 @@ export function LoginPage() {
               graphite for the source repo, oe-blue gradient for the
               community hub. Mirrors the page's login-glass-pro language. */}
           <ClassicAuthFooter />
+          {!KED.hideAuthUpstreamLinks && (<>
           <div className="oe-auth-standard-only mt-4 grid grid-cols-2 gap-3 animate-stagger-in" style={{ animationDelay: '520ms' }}>
             <a
               href="https://github.com/datadrivenconstruction/OpenConstructionERP"
@@ -1103,6 +1107,7 @@ export function LoginPage() {
               <a href="https://github.com/datadrivenconstruction/OpenConstructionERP" target="_blank" rel="noopener noreferrer" className="hover:text-content-secondary transition-colors">GitHub</a>
             </div>
           </div>
+          </>)}
           {/* Running build version - always visible so it's obvious which
               version is live on a fresh open. Matches the Sidebar / About
               treatment (v{APP_VERSION}). */}

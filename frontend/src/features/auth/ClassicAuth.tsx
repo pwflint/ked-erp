@@ -8,6 +8,7 @@
  */
 import { useTranslation } from 'react-i18next';
 import { APP_VERSION } from '@/shared/lib/version';
+import { KED } from '@/ked/flags';
 import { useBrandingStore } from '@/stores/useBrandingStore';
 
 export function ClassicAuthAside() {
@@ -37,18 +38,22 @@ export function ClassicAuthFooter() {
   return (
     <footer className="oe-auth-classic-only oe-auth-footer">
       <span className="tabular-nums">v{APP_VERSION}</span>
+      {!KED.hideAuthUpstreamLinks && (<>
       <span aria-hidden>·</span>
       <a href="https://openconstructionerp.com/docs" target="_blank" rel="noopener noreferrer">
         {t('auth_classic.docs', { defaultValue: 'Docs' })}
       </a>
+      </>)}
       <span aria-hidden>·</span>
       <a href="/api/health" target="_blank" rel="noopener noreferrer">
         {t('auth_classic.status', { defaultValue: 'Status' })}
       </a>
+      {!KED.hideAuthUpstreamLinks && (<>
       <span aria-hidden>·</span>
       <a href="https://openconstructionerp.com/privacy" target="_blank" rel="noopener noreferrer">
         {t('auth_classic.privacy', { defaultValue: 'Privacy' })}
       </a>
+      </>)}
       {operator && (
         <>
           <span aria-hidden>·</span>

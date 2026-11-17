@@ -2285,6 +2285,7 @@ function DashboardPageInner() {
         return; // cannot determine — do nothing
       }
       if (!onboardingState.completed) {
+        if (KED.adminOnlyOnboarding && useAuthStore.getState().userRole !== 'admin') return;
         // Server says NOT completed — clear any stale localStorage flags
         // (e.g. from a previous install) and redirect to the wizard.
         localStorage.removeItem('oe_onboarding_completed');

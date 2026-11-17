@@ -106,6 +106,7 @@ import { DeleteAccountDialog } from './DeleteAccountDialog';
 import { DemoLeftoversPanel } from './DemoLeftoversPanel';
 import { ReferenceDataPanel } from './ReferenceDataPanel';
 import { invalidateProjectLists } from '@/features/projects/invalidateProjectLists';
+import { KED } from '@/ked/flags';
 
 // Audit log now lives as a Settings section (moved out of the sidebar admin
 // grid). We reuse the exact same page component - lazy-loaded so its filter /
@@ -1845,6 +1846,7 @@ export function SettingsPage() {
           </nav>
 
           {/* About link */}
+          {!KED.hideAbout && (
           <div className="hidden lg:block mt-4 px-3 text-center">
             <Link
               to="/about"
@@ -1854,6 +1856,7 @@ export function SettingsPage() {
               <ChevronRight size={12} />
             </Link>
           </div>
+          )}
         </aside>
 
         {/* ── Tab content ──────────────────────────────────────────── */}
@@ -2454,6 +2457,7 @@ export function SettingsPage() {
           </div>{/* End cards grid */}
 
           {/* About link — mobile only (desktop has it in sidebar) */}
+          {!KED.hideAbout && (
           <div className="lg:hidden mt-8 text-center">
             <Link
               to="/about"
@@ -2463,6 +2467,7 @@ export function SettingsPage() {
               <ChevronRight size={12} />
             </Link>
           </div>
+          )}
         </div>
       </div>
     </div>

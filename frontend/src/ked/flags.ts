@@ -29,6 +29,16 @@ export const KED = {
   hiddenFooter: ['github', 'community'] as readonly string[],
   /** Replace upstream's Help menu with the fork's own (see `KedHelpMenu.tsx`). */
   replaceHelpMenu: true,
+  /** Hide the sign-in page's marketing column (and Classic look's side panel); the form stands alone. */
+  hideLoginMarketing: true,
+  /** Hide the sign-in pages' links to upstream: GitHub and community tiles, website, docs and privacy links. */
+  hideAuthUpstreamLinks: true,
+  /** Hide the About tile, its Settings links and footer toggle, and drop the /about and /inside (backers) routes. */
+  hideAbout: true,
+  /** Drop the Learn pages' routes (/videos, /courses, /cases), which stay open by URL when only the menu is hidden. */
+  hideLearnPages: true,
+  /** Send only administrators to the first-run setup wizard; other new users land on the dashboard. */
+  adminOnlyOnboarding: true,
   /** Where the source of this running version is published (AGPL-3.0, section 13). */
   sourceUrl: 'https://github.com/pwflint/ked-erp',
 } as const;
