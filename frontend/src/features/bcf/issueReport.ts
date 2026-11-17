@@ -13,6 +13,7 @@
 import { escapeHtml } from '@/features/bim/printReport';
 
 import type { IssueStats } from './issueStats';
+import { KED } from '@/ked/flags';
 
 /** One issue row as it appears in the report table (already localised /
  *  name-resolved by the caller). */
@@ -138,7 +139,7 @@ export function buildIssueReportHtml(params: IssueReportParams): string {
   <p class="meta">${escapeHtml(params.scopeLabel)} &middot; ${escapeHtml(params.generatedOn)}</p>
   ${summaryTable(params.stats, l)}
   ${issuesTable(params.rows, l)}
-  <p class="brand">OpenConstructionERP</p>
+  <p class="brand">${escapeHtml(KED.displayName || 'OpenConstructionERP')}</p>
 </body>
 </html>`;
 }

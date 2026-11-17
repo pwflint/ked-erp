@@ -35,7 +35,7 @@ export const KED = {
   hideAuthUpstreamLinks: true,
   /** Hide the About tile, its Settings links and footer toggle, and drop the /about and /inside (backers) routes. */
   hideAbout: true,
-  /** Drop the Learn pages' routes (/videos, /courses, /cases), which stay open by URL when only the menu is hidden. */
+  /** Drop the Learn pages' routes (/videos, /courses, /cases), which stay open by URL when only the menu is hidden, and the Pipeline panel's case and video links. */
   hideLearnPages: true,
   /** Send only administrators to the first-run setup wizard; other new users land on the dashboard. */
   adminOnlyOnboarding: true,
@@ -45,6 +45,14 @@ export const KED = {
   hideUpdateCheck: true,
   /** Hide the corner card that asks users to rate or star upstream on GitHub. */
   hideReviewPrompt: true,
+  /** Draw the KED marks where upstream draws its logo and lockup (see `KedBrand.tsx`). */
+  useKedBrand: true,
+  /** Drop the small "by OpenConstructionERP" line under a workspace's own brand (sidebar, sign-in, client portal). The credit lives in the Help menu. */
+  hideByLine: true,
+  /** Show upstream's CAD converters and cost database under plain names instead of "DDC" and "CWICR" (see `brandName.ts`). */
+  genericComponentNames: true,
+  /** Module proposals, the custom-module request and the module developer guide are for administrators only. */
+  adminOnlyModuleRequests: true,
   /** Where the source of this running version is published (AGPL-3.0, section 13). */
   sourceUrl: 'https://github.com/pwflint/ked-erp',
 } as const;

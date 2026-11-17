@@ -13,8 +13,8 @@ export function NotFoundPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-surface-primary p-8">
       <div className="max-w-md text-center">
-        <div className="mb-6 text-9xl font-semibold bg-gradient-to-r from-oe-blue to-violet-500 bg-clip-text text-transparent select-none animate-fade-in">404</div>
-        <h1 className="mb-2 text-xl font-semibold text-content-primary">
+        <div className="ked-display mb-6 text-9xl font-semibold bg-gradient-to-r from-oe-blue to-violet-500 bg-clip-text text-transparent select-none animate-fade-in">404</div>
+        <h1 className="ked-display mb-2 text-xl font-semibold text-content-primary">
           {t('error.not_found', { defaultValue: 'Page not found' })}
         </h1>
         <p className="mb-8 text-sm text-content-secondary">

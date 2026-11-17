@@ -29,6 +29,7 @@ import {
 import { useModuleStore } from '@/stores/useModuleStore';
 import { videoCountForRoute, videoRouteFor } from '@/features/videos/videoRoutes';
 import type { Playbook } from '@/features/cases/types';
+import { KED } from '@/ked/flags';
 
 // The case registry eagerly bundles ~85 playbook data files, so it is loaded
 // LAZILY (dynamic import when the panel opens) to keep it out of the always-on
@@ -284,6 +285,7 @@ function ProjectJourneyPanel({
             </div>
             <div className="flex shrink-0 items-center gap-2">
               {/* One clear route from the map into the guided case library. */}
+              {!KED.hideLearnPages && (
               <button
                 type="button"
                 onClick={() => go('/cases')}
@@ -292,6 +294,7 @@ function ProjectJourneyPanel({
                 <GraduationCap size={14} strokeWidth={2} className="text-oe-blue" aria-hidden />
                 {t('journey.browse_cases', { defaultValue: 'Browse cases' })}
               </button>
+              )}
               <button
                 ref={closeRef}
                 type="button"
@@ -389,7 +392,7 @@ function ProjectJourneyPanel({
                 </p>
               </div>
               <div className="flex shrink-0 flex-wrap items-center gap-2">
-                {phaseHasVideo(currentPhase) && (
+                {!KED.hideLearnPages && phaseHasVideo(currentPhase) && (
                   <button
                     type="button"
                     onClick={() => setVideoRoutes(currentPhase.modules.map((m) => m.to))}
@@ -488,7 +491,7 @@ function ProjectJourneyPanel({
                                 </h4>
                               </div>
                             </div>
-                            {hasVideo && (
+                            {!KED.hideLearnPages && hasVideo && (
                               <button
                                 type="button"
                                 onClick={() => setVideoRoutes(phase.modules.map((m) => m.to))}
@@ -522,7 +525,7 @@ function ProjectJourneyPanel({
                                     active={isOnRoute(location.pathname, m.to)}
                                     onClick={() => go(m.to)}
                                   />
-                                  {cases.length > 0 && (
+                                  {!KED.hideLearnPages && cases.length > 0 && (
                                     <CasesPill
                                       cases={cases}
                                       onOpenCase={(id) => go(`/cases/${id}`)}
@@ -569,7 +572,7 @@ function ProjectJourneyPanel({
                       active={isOnRoute(location.pathname, m.to)}
                       onClick={() => go(m.to)}
                     />
-                    {cases.length > 0 && (
+                    {!KED.hideLearnPages && cases.length > 0 && (
                       <CasesPill cases={cases} onOpenCase={(id) => go(`/cases/${id}`)} />
                     )}
                   </span>
@@ -579,6 +582,7 @@ function ProjectJourneyPanel({
           </section>
 
           {/* The cases link moves into the scroll on a phone, where the header has no room. */}
+          {!KED.hideLearnPages && (
           <button
             type="button"
             onClick={() => go('/cases')}
@@ -587,6 +591,7 @@ function ProjectJourneyPanel({
             <GraduationCap size={14} strokeWidth={2} className="text-oe-blue" aria-hidden />
             {t('journey.browse_cases', { defaultValue: 'Browse cases' })}
           </button>
+          )}
         </div>
       </div>
       {videoRoutes && (

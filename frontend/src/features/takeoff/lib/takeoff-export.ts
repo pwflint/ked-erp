@@ -39,6 +39,7 @@ import {
 import { ANNOTATION_TYPES } from './takeoff-groups';
 import { effectiveQuantity, effectiveUnit, isWallMeasurement, reportingType } from './takeoff-quantity';
 import type { MeasurementSystem } from '@/stores/usePreferencesStore';
+import { KED } from '@/ked/flags';
 import {
   convertQuantity,
   formatQuantity,
@@ -777,7 +778,7 @@ export async function buildTakeoffWorkbook(
   const ExcelJsMod = await import('exceljs');
   const ExcelJsCtor = (ExcelJsMod.Workbook ?? ExcelJsMod.default.Workbook) as typeof ExcelJS.Workbook;
   const wb = new ExcelJsCtor();
-  wb.creator = 'OpenConstructionERP';
+  wb.creator = KED.displayName || 'OpenConstructionERP';
   wb.created = ctx.exportDate ?? new Date();
   // Stored quantities are metric-canonical (D-TKC-016); convert values +
   // units to the user's system at the export boundary. Metric is a

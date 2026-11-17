@@ -14,6 +14,7 @@ import { sortLanguagesByName } from '@/shared/lib/languageOrder';
 import { readRememberChoice, useAuthStore } from '@/stores/useAuthStore';
 import { AuthBackground } from './AuthBackground';
 import { ClassicAuthFooter } from './ClassicAuth';
+import { KED } from '@/ked/flags';
 import { meetsPasswordPolicy } from './passwordPolicy';
 
 export function RegisterPage() {
@@ -179,6 +180,7 @@ export function RegisterPage() {
       </div>
 
       {/* ── Left: benefits (desktop) ── */}
+      {!KED.hideLoginMarketing && (
       <div className="hidden lg:flex lg:w-[460px] xl:w-[500px] shrink-0 relative z-10 flex-col justify-center ps-14 xl:ps-20 pe-8 xl:pe-10 py-6">
         <div className="mb-4 animate-stagger-in" style={{ animationDelay: '0ms' }}>
           <h2 className="oe-section-title">
@@ -231,6 +233,7 @@ export function RegisterPage() {
           <a href="https://OpenConstructionERP.com" target="_blank" rel="noopener noreferrer" className="hover:text-content-secondary transition-colors">OpenConstructionERP.com</a>
         </div>
       </div>
+      )}
 
       {/* ── Right: logo + form ── */}
       <div className="flex flex-1 items-center justify-center p-4 sm:p-6 relative z-10">
@@ -312,6 +315,7 @@ export function RegisterPage() {
                   autoComplete="organization-title"
                   icon={<Briefcase size={16} />}
                 />
+                {!KED.hideLoginMarketing && (
                 <div>
                   <label htmlFor="register-how-found" className="oe-label">
                     {t('auth.how_found_us', 'How did you find us?')}
@@ -339,6 +343,7 @@ export function RegisterPage() {
                     </select>
                   </div>
                 </div>
+                )}
               </div>
 
               <div className="flex flex-col gap-1 animate-stagger-in" style={{ animationDelay: '340ms' }}>
@@ -481,6 +486,7 @@ export function RegisterPage() {
           </div>
 
           {/* Mobile footer */}
+          {!KED.hideAuthUpstreamLinks && (
           <div className="lg:hidden mt-3 text-center text-2xs text-content-quaternary">
             <div className="flex items-center justify-center gap-3">
               <a href="https://OpenConstructionERP.com" target="_blank" rel="noopener noreferrer" className="hover:text-content-secondary transition-colors">OpenConstructionERP.com</a>
@@ -488,6 +494,7 @@ export function RegisterPage() {
               <a href="https://github.com/datadrivenconstruction/OpenConstructionERP" target="_blank" rel="noopener noreferrer" className="hover:text-content-secondary transition-colors">GitHub</a>
             </div>
           </div>
+          )}
         </div>
       </div>
     </div>

@@ -86,6 +86,7 @@ import {
   type PortalOverviewResponse,
 } from './api';
 import { fmtFixed, formatDateValue } from '@/shared/lib/formatters';
+import { KED } from '@/ked/flags';
 
 // English fallbacks for the computed `buyer_portal.documents.cat.*` keys. The default used to be
 // the raw value, so until the key lands in a locale the screen shows the bare
@@ -1909,6 +1910,7 @@ function ShellWrapper({
 
       <footer className="w-full border-t border-border-light mt-10">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-4 text-2xs text-content-tertiary flex items-center justify-between gap-3 flex-wrap">
+          {!KED.hideByLine && (
           <span>
             {t('buyer_portal.footer.contact', {
               defaultValue: 'Questions? Email',
@@ -1920,6 +1922,7 @@ function ShellWrapper({
               info@datadrivenconstruction.io
             </a>
           </span>
+          )}
           <a
             href="https://www.gnu.org/licenses/agpl-3.0.html"
             target="_blank"

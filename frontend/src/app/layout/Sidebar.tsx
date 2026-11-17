@@ -1960,6 +1960,7 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
              contributors a clearer first step. When iconified, shrinks
              to a centred icon-only square — the dashed border still
              signals "add something". */}
+        {(!KED.adminOnlyModuleRequests || userRole === 'admin') && (<>
         <div className={clsx('pt-2 pb-1', iconified ? 'px-0 flex justify-center' : 'px-3')}>
           <NavLink
             to="/modules/developer-guide"
@@ -2035,6 +2036,7 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
             )}
           </button>
         </div>
+        </>)}
       </nav>
 
       {/* Admin / setup surfaces — rendered as a 2-column button grid

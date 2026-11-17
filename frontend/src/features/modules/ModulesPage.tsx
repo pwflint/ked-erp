@@ -69,6 +69,7 @@ import { getModulesByCategory } from '@/modules/_registry';
 import { translateManifestText } from '@/modules/_i18n';
 import { fmtList, fmtFixed } from '@/shared/lib/formatters';
 import { invalidateProjectLists } from '@/features/projects/invalidateProjectLists';
+import { KED } from '@/ked/flags';
 
 /* ── Types ─────────────────────────────────────────────────────────────── */
 
@@ -309,6 +310,7 @@ export function ModulesPage() {
                 profiles / packs / data-packages / system-modules flow.
                 Sits at the head of the action cluster as the leading help pill. */}
             <ModuleGuideButton content={modulesGuide} />
+            {(!KED.adminOnlyModuleRequests || useAuthStore.getState().userRole === 'admin') && (
             <Link
               to="/modules/developer-guide"
               className="inline-flex items-center gap-2 h-9 px-3 rounded-lg border border-oe-blue/30 bg-oe-blue/5 text-xs font-medium text-oe-blue hover:bg-oe-blue/10 hover:border-oe-blue/50 transition-colors shrink-0"
@@ -319,6 +321,7 @@ export function ModulesPage() {
               <Info size={14} />
               {t('modules.dev_guide', { defaultValue: 'Build a module - developer guide' })}
             </Link>
+            )}
           </>
         }
       />
@@ -339,10 +342,10 @@ export function ModulesPage() {
             label: t('nav.setup_databases', { defaultValue: 'Databases & Resources' }),
             onClick: () => navigate('/setup/databases'),
           },
-          {
+          ...((!KED.adminOnlyModuleRequests || useAuthStore.getState().userRole === 'admin') ? [{
             label: t('modules.dev_guide', { defaultValue: 'Developer guide' }),
             onClick: () => navigate('/modules/developer-guide'),
-          },
+          }] : []),
           { label: t('nav.settings', { defaultValue: 'Settings' }), onClick: () => navigate('/settings') },
         ]}
       >
@@ -1223,6 +1226,7 @@ function DataPackagesTab() {
       )}
 
       {/* Community / Build Your Own */}
+      {(!KED.adminOnlyModuleRequests || useAuthStore.getState().userRole === 'admin') && (
       <div className="mt-12">
         <Card>
           <div className="relative overflow-hidden">
@@ -1268,6 +1272,7 @@ function DataPackagesTab() {
           </div>
         </Card>
       </div>
+      )}
       <ConfirmDialog {...confirmProps} />
     </div>
   );

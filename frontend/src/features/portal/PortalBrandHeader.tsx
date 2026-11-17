@@ -10,6 +10,7 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useBrandingStore } from '@/stores/useBrandingStore';
+import { KED } from '@/ked/flags';
 
 export function PortalBrandHeader() {
   const { t } = useTranslation();
@@ -43,12 +44,14 @@ export function PortalBrandHeader() {
         </span>
       )}
       {/* Subordinate attribution stays visible (AGPL-3.0), as on the login page. */}
+      {!KED.hideByLine && (
       <span className="mt-2 block text-2xs leading-none text-content-tertiary">
         by{' '}
         <span className="whitespace-nowrap">
           OpenConstruction<span className="font-semibold">ERP</span>
         </span>
       </span>
+      )}
     </header>
   );
 }

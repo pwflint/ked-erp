@@ -45,6 +45,7 @@ import { hydrateInfoBlocksFromServer } from '@/stores/useInfoBlockPrefsStore';
 import { useViewModeDefault } from './layout/useViewModeDefault';
 import { ddcVerifyIntegrity, ddcInjectMeta, DDC_ORIGIN } from '@/shared/lib/ddc-integrity';
 import { KED } from '@/ked/flags';
+import { KedAdminOnly } from '@/ked/KedAdminOnly';
 import { NavigationProgress } from '@/shared/lib/navigationProgress';
 import { useKeyboardShortcuts } from '@/shared/hooks/useKeyboardShortcuts';
 import { useTranslation } from 'react-i18next';
@@ -1725,7 +1726,7 @@ export default function App() {
         {/* Legacy redirect — moved 2026-05-23 from PropDev settings; now to Governance. */}
         <Route path="/property-dev/settings/validation-rules" element={<Navigate to="/governance?tab=validation" replace />} />
         <Route path="/modules" element={<P title="Modules"><ModulesPage /></P>} />
-        <Route path="/modules/developer-guide" element={<P title="Module Developer Guide"><ModuleDeveloperGuide /></P>} />
+        <Route path="/modules/developer-guide" element={<P title="Module Developer Guide"><KedAdminOnly><ModuleDeveloperGuide /></KedAdminOnly></P>} />
 
         <Route path="/setup/databases" element={<P title="Databases & Resources"><DatabaseSetupPage /></P>} />
         <Route path="/settings" element={<P title="Settings"><SettingsPage /></P>} />

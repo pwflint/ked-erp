@@ -33,6 +33,19 @@ const FIXED_NAME_ICONS = [
   'pwa/icon-maskable-512.png',
 ];
 
+/** Upstream's brand-kit files, requested by fixed name (the manifest's app icon,
+ *  and any page that links them directly). Each is emitted with the KED small
+ *  mark over the copy from `public/`. */
+const UPSTREAM_BRAND_FILES = [
+  'brand/erp/erp-appicon-512.svg',
+  'brand/erp/erp-mark-light.svg',
+  'brand/erp/erp-mark-dark.svg',
+  'brand/erp/erp-favicon-16-light.svg',
+  'brand/erp/erp-favicon-16-dark.svg',
+  'brand/erp/erp-favicon-32-light.svg',
+  'brand/erp/erp-favicon-32-dark.svg',
+];
+
 const SEO_META =
   /^[ \t]*<meta (?:name="(?:description|keywords|author|generator|copyright|application-name|twitter:[^"]+)"|property="og:[^"]+")[^>]*>[ \t]*\r?\n/gm;
 const ICON_AND_CANONICAL_LINKS = /^[ \t]*<link rel="(?:icon|canonical)"[^>]*>[ \t]*\r?\n/gm;
@@ -81,6 +94,10 @@ export function kedHtml(): Plugin {
     generateBundle() {
       for (const fileName of FIXED_NAME_ICONS) {
         this.emitFile({ type: 'asset', fileName, source: readFileSync(path.join(ICON_DIR, fileName)) });
+      }
+      const kedMark = readFileSync(path.join(ICON_DIR, 'favicon.svg'));
+      for (const fileName of UPSTREAM_BRAND_FILES) {
+        this.emitFile({ type: 'asset', fileName, source: kedMark });
       }
     },
   };

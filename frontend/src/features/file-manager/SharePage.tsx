@@ -32,6 +32,7 @@ import {
 import { Logo } from '@/shared/ui';
 import { accessShareLink, fetchShareLinkInfo } from './api';
 import type { ShareLinkPublicInfo } from './types';
+import { KED } from '@/ked/flags';
 
 type FetchState =
   | { kind: 'loading' }
@@ -307,9 +308,11 @@ export function SharePage() {
           )}
         </div>
 
+        {!KED.hideByLine && (
         <p className="mt-4 text-center text-2xs text-content-quaternary">
           OpenConstructionERP · datadrivenconstruction.io
         </p>
+        )}
       </div>
     </div>
   );

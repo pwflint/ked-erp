@@ -2,6 +2,8 @@
 // Copyright (c) 2026 Artem Boiko / DataDrivenConstruction
 import clsx from 'clsx';
 import { publicAsset } from '../lib/publicAsset';
+import { KED } from '@/ked/flags';
+import { KedMark, KedLockup } from '@/ked/KedBrand';
 
 type LogoSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
@@ -29,6 +31,7 @@ const sizeMap: Record<LogoSize, string> = {
 
 /** OpenConstructionERP mark, rendered from the unmodified brand-kit SVGs. */
 export function Logo({ size = 'md', animate = false, tone = 'auto', className }: LogoProps) {
+  if (KED.useKedBrand) return <KedMark size={size} animate={animate} className={className} />;
   const img = 'block h-full w-full select-none';
   return (
     <span
@@ -93,6 +96,7 @@ interface LogoWithTextProps extends LogoProps {
  * Mark + wordmark lockup. The gap is a quarter of the mark width (kit clear space).
  */
 export function LogoWithText({ size = 'md', animate, tone, className }: LogoWithTextProps) {
+  if (KED.useKedBrand) return <KedLockup size="lg" animate={animate} className={className} />;
   const gap = size === 'xs' ? 'gap-1' : size === 'lg' ? 'gap-3' : size === 'xl' ? 'gap-4' : 'gap-2';
   return (
     <span
@@ -132,6 +136,7 @@ const LOCKUP = {
  * Sizes are absolute so the root font scale never inflates the brand.
  */
 export function BrandLockup({ size = 'nav', animate, className }: { size?: keyof typeof LOCKUP; animate?: boolean; className?: string }) {
+  if (KED.useKedBrand) return <KedLockup size={size} animate={animate} className={className} />;
   const s = LOCKUP[size];
   return (
     <span className={clsx('inline-flex items-center', s.gap, className)} role="img" aria-label="OpenConstructionERP" style={{ ['--oe-lockup-mark' as string]: s.mark }}>

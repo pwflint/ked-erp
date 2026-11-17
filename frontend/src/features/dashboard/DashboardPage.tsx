@@ -2797,7 +2797,7 @@ function DashboardPageInner() {
           below merges DDC attribution + OSS badge + status pills into a
           thin meta-strip. Saves ~180px above the fold. */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between animate-card-in">
-        <h1 className="text-lg font-semibold tracking-tight text-content-primary">
+        <h1 className="ked-display text-lg font-semibold tracking-tight text-content-primary">
           {(() => {
             const h = new Date().getHours();
             const key =

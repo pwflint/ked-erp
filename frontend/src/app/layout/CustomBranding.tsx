@@ -36,6 +36,7 @@ import { BrandLockup, Logo } from '@/shared/ui';
 import { useToastStore } from '@/stores/useToastStore';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useThemeStore } from '@/stores/useThemeStore';
+import { KED } from '@/ked/flags';
 import {
   useBrandingStore,
   BRANDING_MAX_LOGO_BYTES,
@@ -125,11 +126,11 @@ export function CustomBranding({ iconified }: CustomBrandingProps) {
     }
     return (
       <a
-        href="https://openconstructionerp.com/?utm_source=app"
+        href={KED.useKedBrand ? undefined : "https://openconstructionerp.com/?utm_source=app"}
         target="_blank"
         rel="noopener noreferrer"
         className="hover:opacity-80 transition-opacity"
-        title="OpenConstructionERP"
+        title={KED.useKedBrand ? KED.displayName : "OpenConstructionERP"}
       >
         <Logo size="md" className="!h-[24px] !w-[24px]" />
       </a>
@@ -191,6 +192,7 @@ export function CustomBranding({ iconified }: CustomBrandingProps) {
                   under the user's brand. AGPL-3.0 attribution requirement
                   is satisfied while the user's logo stays the dominant
                   visual; font is small + muted on purpose. */}
+              {!KED.hideByLine && (
               <span
                 className="mt-0.5 block text-2xs leading-none text-content-quaternary truncate"
                 style={{
@@ -203,14 +205,15 @@ export function CustomBranding({ iconified }: CustomBrandingProps) {
                   OpenConstruction<span className="font-semibold">ERP</span>
                 </span>
               </span>
+              )}
             </button>
           ) : (
             <a
-              href="https://openconstructionerp.com/?utm_source=app"
+              href={KED.useKedBrand ? undefined : "https://openconstructionerp.com/?utm_source=app"}
               target="_blank"
               rel="noopener noreferrer"
               className="ms-2 flex w-fit items-center py-2 hover:opacity-80 transition-opacity"
-              title="OpenConstructionERP"
+              title={KED.useKedBrand ? KED.displayName : "OpenConstructionERP"}
             >
               {/* 24 px mark + one-word name; ms-2 puts the mark on the nav icon column. */}
               <BrandLockup size="nav" />

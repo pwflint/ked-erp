@@ -787,6 +787,7 @@ export function LoginPage() {
                   )}
                   {/* "by OpenConstructionERP" - subordinate attribution that
                       stays visible (AGPL-3.0). Mirrors CustomBranding.tsx. */}
+                  {!KED.hideByLine && (
                   <span
                     className="mt-2 block text-2xs leading-none text-content-tertiary"
                     style={{ fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif", letterSpacing: '0.02em' }}
@@ -797,7 +798,10 @@ export function LoginPage() {
                       <span className="text-content-quaternary">ERP</span>
                     </span>
                   </span>
+                  )}
                 </div>
+              ) : KED.useKedBrand ? (
+                <LogoWithText animate />
               ) : (
                 <div className="flex items-center gap-2">
                   <Logo size="md" animate />
