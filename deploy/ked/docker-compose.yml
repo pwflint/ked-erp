@@ -1,0 +1,76 @@
+# KED deployment of the ked-erp image (build blueprint, step 3).
+#
+# Runs the image the KED image workflow builds and pushes to GHCR, tagged with
+# the commit SHA. Settings and secrets come from `.env` beside this file; copy
+# `.env.example` and fill it in. Never commit `.env`.
+#
+# Database: set DATABASE_URL to an external Postgres (Neon: the direct,
+# non-pooled connection string). For a local run with no external database,
+# start the bundled Postgres with the `local-db` profile and leave DATABASE_URL
+# empty:
+#
+#   docker compose --profile local-db up -d
+#
+# Volume names are prefixed with the compose project name. To keep an existing
+# instance's data, start it under the same project name (`-p <name>`).
+services:
+  app:
+    image: "ghcr.io/pwflint/ked-erp:${KED_IMAGE_TAG:?set KED_IMAGE_TAG to a commit SHA}"
+    platform: linux/amd64
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+        required: false
+    ports:
+      - "127.0.0.1:${KED_PORT:-8080}:8080"
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      SEED_DEMO: "false"
+      # The starter cost catalogue (50 EUR items, 10 assemblies) refills itself
+      # whenever its tables are empty; KED loads its own catalogue instead.
+      OE_SKIP_STARTER_SEED: "true"
+      OE_REGISTRATION_MODE: closed
+      SERVE_FRONTEND: "true"
+      OE_DATA_DIR: /data
+      VECTOR_BACKEND: lancedb
+      JWT_SECRET: "${JWT_SECRET:?set JWT_SECRET (64 random hex characters)}"
+      ALLOWED_ORIGINS: "${ALLOWED_ORIGINS:-http://localhost:8080,http://127.0.0.1:8080}"
+      # External database (Neon). Empty when the local-db profile is used.
+      DATABASE_URL: "${DATABASE_URL:-}"
+      # Bundled database, used only when DATABASE_URL is empty.
+      OE_DB_HOST: "${OE_DB_HOST:-postgres}"
+      OE_DB_PORT: "5432"
+      OE_DB_USER: oe
+      OE_DB_NAME: openestimate
+      OE_DB_PASSWORD: "${POSTGRES_PASSWORD:-}"
+    volumes:
+      - app_data:/data
+    deploy:
+      resources:
+        limits:
+          # Step 3 starts at 3 GB; step 9 sets the production value from the
+          # Droplet configuration.
+          memory: "${KED_MEMORY_LIMIT:-3g}"
+
+  postgres:
+    profiles: ["local-db"]
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: oe
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-}"
+      POSTGRES_DB: openestimate
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U oe -d openestimate"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  app_data:
+  pg_data:
