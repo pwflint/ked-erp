@@ -3,6 +3,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { useTranslation as useI18nTranslation } from 'react-i18next';
+import { installKedBrandName } from '@/ked/brandName';
 
 export const SUPPORTED_LANGUAGES = [
   // Plain English names no region, and the two entries under it are how a
@@ -632,6 +633,7 @@ i18n
       bindI18nStore: 'added',
     },
   });
+installKedBrandName(i18n);
 
 // Persist language choice to localStorage so it survives page reloads,
 // AND fetch the corresponding locale chunk if it isn't loaded yet.

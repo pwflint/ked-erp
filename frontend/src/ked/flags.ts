@@ -39,6 +39,8 @@ export const KED = {
   hideLearnPages: true,
   /** Send only administrators to the first-run setup wizard; other new users land on the dashboard. */
   adminOnlyOnboarding: true,
+  /** The product name shown in translated strings instead of upstream's (see `brandName.ts`). Empty string turns the swap off. */
+  displayName: 'KALEIOPE Environmental Design',
   /** Where the source of this running version is published (AGPL-3.0, section 13). */
   sourceUrl: 'https://github.com/pwflint/ked-erp',
 } as const;
