@@ -53,6 +53,18 @@ export const KED = {
   genericComponentNames: true,
   /** Module proposals, the custom-module request and the module developer guide are for administrators only. */
   adminOnlyModuleRequests: true,
+  /** Give the sidebar the backend owner of rows upstream's route map leaves out, so switched-off modules leave the menu (see `routeOwners.ts`). */
+  fillRouteOwners: true,
+  /** Drop the animated sample estimate (German cost groups, euro figures) behind the sign-in, register and password pages. */
+  hideAuthSampleBackground: true,
+  /** Drop upstream's tagline above the sign-in form. */
+  hideAuthTagline: true,
+  /** Drop links and hints that point to demo data, which this instance does not load (register page, empty dashboard). */
+  hideDemoLinks: true,
+  /** Label a zero dashboard total with the account's currency, not euros, when no project has a currency yet. */
+  accountCurrencyFallback: true,
+  /** Count only the modules this account can use in the dashboard's module figure, not every module discovered. */
+  countServedModules: true,
   /** Where the source of this running version is published (AGPL-3.0, section 13). */
   sourceUrl: 'https://github.com/pwflint/ked-erp',
 } as const;

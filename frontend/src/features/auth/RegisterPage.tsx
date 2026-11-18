@@ -475,13 +475,13 @@ export function RegisterPage() {
                   {t('auth.login', 'Sign in')}
                 </Link>
               </p>
-              <button
+              {!KED.hideDemoLinks && <button
                 type="button"
                 onClick={() => navigate('/login')}
                 className="mt-2 block w-full text-center text-2xs text-oe-blue hover:text-oe-blue-hover hover:underline font-medium cursor-pointer transition-colors"
               >
                 {t('auth.try_demo', 'Try demo account →')}
-              </button>
+              </button>}
             </div>
           </div>
 

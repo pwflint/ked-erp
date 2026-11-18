@@ -828,9 +828,9 @@ export function LoginPage() {
               </button>
               )}
             </div>
-            <p className="mt-2 text-sm text-content-tertiary">
+            {!KED.hideAuthTagline && (<p className="mt-2 text-sm text-content-tertiary">
               {t('login.workspace_tagline', { defaultValue: 'Professional construction project workspace' })}
-            </p>
+            </p>)}
           </div>
 
           {/* Open-source banner (mobile) */}

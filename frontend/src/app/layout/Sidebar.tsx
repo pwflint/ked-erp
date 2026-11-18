@@ -71,6 +71,7 @@ import { useSidebarBadges } from '@/shared/hooks/useSidebarBadges';
 import { useHiddenModules } from '@/shared/hooks/useHiddenModules';
 import { useFooterPrefs } from '@/shared/lib/footerPrefs';
 import { KED } from '@/ked/flags';
+import { KED_ROUTE_OWNERS } from '@/ked/routeOwners';
 import { floatingPref } from '@/shared/lib/floatingPrefs';
 import { usePartnerPack } from '@/shared/hooks/usePartnerPack';
 import { applyPackMenu, visibleHiddenRoutes } from './packMenu';
@@ -396,6 +397,7 @@ export const ROUTE_BACKEND_MODULE: Record<string, string | readonly string[]> = 
   '/rebar-schedule': 'oe_rebar_schedule',
   '/value': 'oe_value',
 };
+if (KED.fillRouteOwners) for (const [route, owner] of Object.entries(KED_ROUTE_OWNERS)) ROUTE_BACKEND_MODULE[route] ??= owner;
 
 // localStorage key for collapsed state
 const COLLAPSED_KEY = 'oe_sidebar_collapsed_v2';

@@ -11,6 +11,7 @@
  */
 
 import { useEffect, useRef, useCallback } from 'react';
+import { KED } from '@/ked/flags';
 
 /* ── Config ──────────────────────────────────────────────────────────── */
 
@@ -259,6 +260,7 @@ function DashboardGrid() {
 /* ── Main Background ─────────────────────────────────────────────────── */
 
 export function AuthBackground() {
+  if (KED.hideAuthSampleBackground) return null;
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none oce-auth-bg" aria-hidden="true">
       <AnimatedTable />

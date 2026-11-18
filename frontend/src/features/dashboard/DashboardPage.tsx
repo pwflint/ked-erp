@@ -72,7 +72,7 @@ import {
   useDashboardRollupContext,
 } from './context/DashboardRollupContext';
 import { useDashboardRollup } from './hooks/useDashboardRollup';
-import { getNumberLocale } from '@/stores/usePreferencesStore';
+import { getNumberLocale, usePreferencesStore } from '@/stores/usePreferencesStore';
 
 // Static Tailwind class strings (dynamic `lg:col-span-${n}` would be purged).
 const DASH_SPAN_CLASS: Record<number, string> = {
@@ -962,7 +962,7 @@ function KpiRibbon({
   // Fallback currency for the rare case the rollup has no per-currency
   // buckets yet (no priced BOQs) \u2014 only used to label a zero figure.
   const fallbackCurrency =
-    currencyTotals[0]?.currency ?? projects?.[0]?.currency ?? 'EUR';
+    currencyTotals[0]?.currency ?? projects?.[0]?.currency ?? (KED.accountCurrencyFallback ? usePreferencesStore.getState().currency || undefined : undefined) ?? 'EUR';
 
   // Compact currency formatter using Intl.NumberFormat \u2014 handles every ISO
   // 4217 code natively (BRL, INR, JPY, etc.). For values \u2265 1M we use the
@@ -1811,7 +1811,7 @@ function SystemStatusSummary({
   // catalogue) reports them through isError, so we can safely treat
   // `undefined` as "loading" and render a skeleton pulse instead of a
   // misleading "0" on a cold server. `null` = pending.
-  const moduleCount = Array.isArray(modules) ? modules.length : modulesFailed ? 0 : null;
+  const moduleCount = Array.isArray(modules) ? (KED.countServedModules ? (modules as { enabled?: boolean }[]).filter((m) => m.enabled !== false).length : modules.length) : modulesFailed ? 0 : null;
   const projectCount = projects ? projects.length : null;
   const boqBadgeCount = boqsLoading ? null : boqCount ?? 0;
   const userCount = canListUsers ? (usersList ? usersList.length : null) : 0;
@@ -3155,11 +3155,11 @@ function ProjectsList({ projects }: { projects?: ProjectSummary[] }) {
                 <FolderPlus size={16} strokeWidth={1.75} />
                 {t('dashboard.empty.cta_create', { defaultValue: 'Create project' })}
               </Button>
-              <p className="text-xs text-content-tertiary">
+              {!KED.hideDemoLinks && <p className="text-xs text-content-tertiary">
                 {t('dashboard.empty.demo_hint', {
                   defaultValue: 'Or load a demo project from Settings → Demo data',
                 })}
-              </p>
+              </p>}
             </div>
           }
         />
@@ -3566,7 +3566,7 @@ function SystemStatus() {
       >
         <span className="text-sm text-content-secondary">{t('dashboard.modules_loaded')}</span>
         <span className="text-sm font-semibold text-content-primary tabular-nums">
-          {Array.isArray(modules) ? modules.length : modulesFailed ? 0 : '\u2014'}
+          {Array.isArray(modules) ? (KED.countServedModules ? (modules as { enabled?: boolean }[]).filter((m) => m.enabled !== false).length : modules.length) : modulesFailed ? 0 : '\u2014'}
         </span>
       </div>
       <div
